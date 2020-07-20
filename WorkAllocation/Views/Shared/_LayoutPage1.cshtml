@@ -1,0 +1,205 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Work allocation :  Ceinsys</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="~/css/fontawesome-free/css/all.min.css" />
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" />
+    <link rel="stylesheet" href="~/css/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css" />
+    <link rel="stylesheet" href="~/css/adminlte.min.css" />
+    <link rel="stylesheet" href="~/js/overlayScrollbars/css/OverlayScrollbars.min.css" />
+    <link rel="stylesheet" href="~/js/datatables/css/dataTables.bootstrap4.min.css" />
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet" />
+    <link rel="stylesheet" href="~/js/select2/css/select2.min.css" />
+    <link rel="stylesheet" href="~/css/style.css" />
+
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+    <div class="wrapper">
+        <!-- Navbar -->
+        <nav class="main-header navbar navbar-expand  navbar-white">
+            <!-- Left navbar links -->
+            <ul class="navbar-nav">
+                <li class="nav-item"> <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a> </li>
+            </ul>
+            <!-- SEARCH FORM -->
+            <div class="form-inline logotxt"> <span class="orange">Work</span>&nbsp; <span class="blue"> Allocation </span> </div>
+            <!-- Right navbar links -->
+            <ul class="navbar-nav ml-auto">
+                <!-- Notifications Dropdown Menu -->
+                <li class="nav-item"> <a class="nav-link btn btn-sm btn-warning" href="#"> <i class="fa fa-reply"></i> Back to Dashboard </a> </li>
+                <li class="nav-item"> <a class="nav-link" href="#"> <i class="fas fa-user"></i> Logout </a> </li>
+            </ul>
+        </nav>
+        <!-- /.navbar -->
+        <!-- Main Sidebar Container -->
+        <aside class="main-sidebar elevation-4" style="background:#FFF;">
+            <!-- Brand Logo -->
+            <a href="/" class="brand-link"> <img src="~/img/Logo-s.png" alt="Disha Portal" class="brand-image img-circle elevation-3"> <span class="brand-text font-weight-light"><img src="~/img/logo.png" alt="Work Allocation"></span> </a>
+            <!-- Sidebar -->
+            <div class="sidebar sidebar-dark-primary newbar">
+                <!-- Sidebar Menu -->
+                <nav class="mt-2">
+                    <ul class="nav nav-pills nav-sidebar flex-column text-sm" data-widget="treeview" role="menu" data-accordion="false">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p> Dashboard</p>
+                            </a>
+                        </li>
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-file"></i>
+                                <p> Masters <i class="right fas fa-angle-left"></i> </p>
+                            </a>
+                            <ul class="nav nav-treeview" style="background:rgba(255,255,255, 0.045);">
+                                <li class="nav-item">
+                                    <a href="project-master.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Projects</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="set-project-target.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Set Project Target</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="activity-type-wise-target.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Activity Type Wise Target</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="work-allocation.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Work Allocation</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="allocation-status.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Allocation Status</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-file"></i>
+                                <p>Option</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="fas fa-circle nav-icon"></i>
+                                <p>Level 1</p>
+                            </a>
+                        </li>
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-circle"></i>
+                                <p> Level 1 <i class="right fas fa-angle-left"></i> </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Level 2</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item has-treeview">
+                                    <a href="#" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p> Level 2 <i class="right fas fa-angle-left"></i> </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="#" class="nav-link">
+                                                <i class="far fa-dot-circle nav-icon"></i>
+                                                <p>Level 3</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="#" class="nav-link">
+                                                <i class="far fa-dot-circle nav-icon"></i>
+                                                <p>Level 3</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="#" class="nav-link">
+                                                <i class="far fa-dot-circle nav-icon"></i>
+                                                <p>Level 3</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Level 2</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="fas fa-circle nav-icon"></i>
+                                <p>Level 1</p>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                <!-- /.sidebar-menu -->
+            </div>
+            <!-- /.sidebar -->
+        </aside>
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            @RenderBody()
+        </div>
+        <!-- /.content-wrapper -->
+        <footer class="main-footer">
+            <span>Copyright &copy; 2020 <a href="https://www.ceinsys.com/" target="_blank">www.ceinsys.com</a>.</span> All rights reserved.
+            <div class="float-right d-none d-sm-inline-block"> Version 1.0 </div>
+        </footer>
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+        </aside>
+        <!-- /.control-sidebar -->
+    </div>
+    <!-- ./wrapper -->
+    <!-- jQuery -->
+    <script src="~/js/jquery/jquery.min.js"></script>
+    <script src="~/js/jquery-ui/jquery-ui.min.js"></script>
+    <script>
+        $.widget.bridge('uibutton', $.ui.button)
+    </script>
+    <script src="~/js/moment.min.js"></script>
+    <script src="~/js/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/css/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+    <script src="~/js/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+    <script src="~/js/adminlte.min.js"></script>
+    <script src="~/js/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="~/js/datatables/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/js/select2/js/select2.full.min.js"></script>
+    <script>
+        $(function () {
+            $('#company').DataTable({
+                "paging": true,
+                "lengthChange": true,
+                "searching": true,
+                "ordering": true,
+            });
+        });
+        //Initialize Select2 Elements
+        $('.select2').select2()
+    </script>
+
+</body>
+</html>

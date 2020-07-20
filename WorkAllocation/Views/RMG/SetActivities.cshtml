@@ -1,0 +1,248 @@
+﻿
+@{
+    ViewBag.Title = "SetActivities";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0 text-dark">Set Project Activities</h1>
+            </div><!-- /.col -->
+            <!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+<div class="container-fluid">
+    <!-- Main row -->
+    @using (Html.BeginForm("Upload", "RMG", FormMethod.Post, new
+    {
+        enctype = "multipart/form-data"
+    }))
+    {
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <!-- /.card-header -->
+                    <!-- form start -->
+                    <div class="card-body">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-sm-5">
+                                    <label>Project Name</label>
+                                    <<select class="select2" id="PROJECT_NAME" name="PROJECT_NAME" data-placeholder="Select Project Name" style="width: 100%;"></select>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label>Select WBS Excel</label>
+                                    <input type="file" id="fileupload" name="fileupload">
+                                </div>
+                                <div class="col-sm-3">
+                                    <br />
+                                    <a href="~/Files/activity_projectwise.xlsx"><img src="img/excel-icon.jpg" /> Download WBS Format</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+            </div>
+        </div>
+    <!-- /.row (main row) -->
+    <!-- Row -->
+        <div class="row">
+            <div class="col text-center">
+                <button type="button" id="uploadbutton" name="uploadbutton" class="btn btn-sm btn-success">Upload</button>&nbsp;
+                <button type="reset" class="btn btn-sm btn-warning">Reset</button>
+            </div>
+            <div class="clearfix">&nbsp;</div>
+        </div>
+    }
+    <div class="clearfix">&nbsp;</div>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body table-responsive pt-2">
+                    <table id="company" class="table table-bordered table-striped table-sm">
+                        <thead>
+                            <tr>
+                                <th>Sr. No.</th>
+                                <th>Level 1</th>
+                                <th hidden="hidden">Level 2</th>
+                                <th>Main Activity</th>
+                                <th>Sub Activities </th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>01</td>
+
+                                <td>
+                                    Production
+                                </td>
+                                <td>
+                                    Data Integration
+                                </td>
+                                <td>
+                                    ATTRIBUTION
+                                </td>
+                                <td><a href="#" data-toggle="modal" data-target="#riskDetails" class="text-primary"><i class="fa fa-edit"></i></a> &nbsp; <a href="#" class="text-danger"><i class="fa fa-trash"></i></a></td>
+                            </tr>
+                            <tr>
+                                <td>02</td>
+
+                                <td>
+                                    Production
+                                </td>
+                                <td>
+                                    Data Sanitization
+                                </td>
+                                <td>
+                                    Attribute Extraction
+                                </td>
+                                <td><a href="#" class="text-primary"><i class="fa fa-edit"></i></a> &nbsp; <a href="#" class="text-danger"><i class="fa fa-trash"></i></a></td>
+                            </tr>
+                            <tr>
+                                <td>03</td>
+
+                                <td>
+                                    Production
+                                </td>
+                                <td>
+                                    Data Updation
+                                </td>
+                                <td>
+                                    Topology Check And Cleanup
+                                </td>
+                                <td><a href="#" class="text-primary"><i class="fa fa-edit"></i></a> &nbsp; <a href="#" class="text-danger"><i class="fa fa-trash"></i></a></td>
+                            </tr>
+
+                            <!--<tr>
+                              <td>09</td>
+                              <td>Project Name</td>
+                              <td>water</td>
+                              <td>2020-21 </td>
+                              <td>2500000</td>
+                              <td><a href="#" class="text-primary"><i class="fa fa-edit"></i></a> &nbsp; <a href="#" class="text-danger"><i class="fa fa-trash"></i></a></td>
+                            </tr>
+                            <tr>
+                              <td>10</td>
+                              <td>Project Name</td>
+                              <td>Energy</td>
+                              <td>2020-21 </td>
+                              <td>2500000</td>
+                              <td><a href="#" class="text-primary"><i class="fa fa-edit"></i></a> &nbsp; <a href="#" class="text-danger"><i class="fa fa-trash"></i></a></td>
+                            </tr>
+                            <tr>
+                              <td>11</td>
+                              <td>Project Name</td>
+                              <td>water</td>
+                              <td>2020-21 </td>
+                              <td>2500000</td>
+                              <td><a href="#" class="text-primary"><i class="fa fa-edit"></i></a> &nbsp; <a href="#" class="text-danger"><i class="fa fa-trash"></i></a></td>
+                            </tr>-->
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>Sr. No.</th>
+                                <th>Level 1</th>
+                                <th>Level 2</th>
+                                <th>Main Activity</th>
+                                <th>Mandays </th>
+                                <th>Action</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/js/jquery/jquery.min.js"></script>
+<script src="~/js/jquery-ui/jquery-ui.min.js"></script>
+<script>
+    $(document).ready(function () {
+        debugger;
+        getProject();
+
+        Project_GridList();
+
+        $('#uploadbutton').click(function () {
+            debugger;
+            Insert_Activities();
+        });
+    });
+
+    function getProject() {
+
+        var Domain = $('#PROJECT_NAME');
+        $('#PROJECT_NAME').empty();
+        $.ajax({
+            url: "@Url.Action("GetProjectName", "RMG")",
+            method: 'post',
+            dataType: 'json',
+            success: function (data) {
+                PROJECT_NAME.append($('<option/>', { value: -1, text: 'Please Select' }));
+                $(data).each(function (index, item) {
+                    PROJECT_NAME.append($('<option/>', { value: item.PROJECT_CODE, text: item.PROJECT_NAME }));
+                });
+            }
+        });
+    }
+
+    function Insert_Activities() {
+        var res = validate();
+        if (res == false) {
+            return false;
+        };
+        var ID = 0;
+        if ($('#hdn').val() == 0) {
+            ID = 0;
+        }
+        else {
+            ID = $('#hdn').val();
+        }
+
+        var Data =
+         {
+
+             PROJECT_UID: ID,
+
+             PROJECT_CODE: $('#PROJECT_CODE').val(),
+             PROJECT_NAME: $('#PROJECT_NAME').val(),
+             DOMAIN: $('#DOMAIN :selected').text(),
+             START_DATE: $('#START_DATE').val(),
+             END_DATE: $('#END_DATE').val(),
+             EMP_CODE: $('#EMP_CODE').val(),
+
+         };
+        $.ajax({
+
+            url: "@Url.Action("InsUpdProject", "RMG")",
+            type: "POST",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            data: JSON.stringify(Data),
+            success: function (result) {
+                if (result == true) {
+
+                    alert("Record is Saved Successfully");
+                    location.reload();
+                }
+                else if (result == false) {
+                    alert("Technical Issue occurs");
+                }
+
+            },
+            error: function (errormessage) {
+                alert(errormessage.responseText);
+            }
+        });
+    }
+
+
+</script>

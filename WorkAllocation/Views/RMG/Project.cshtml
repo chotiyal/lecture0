@@ -1,0 +1,402 @@
+﻿
+@{
+    ViewBag.Title = "Project";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0 text-dark">Project Master</h1>
+            </div>
+            <!-- /.col -->
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        <!-- Main row -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <!-- /.card-header -->
+                    <!-- form start -->
+                    <div class="card-body">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <label>Project Code</label>
+                                    <input type="text" id="PROJECT_CODE" name="PROJECT_CODE" class="form-control" placeholder="Project Code">
+                                </div>
+                                <div class="col-sm-6">
+                                    <label>Project Name</label>
+                                    <input type="text" id="PROJECT_NAME" name="PROJECT_NAME" class="form-control" placeholder="Project Name">
+                                </div>
+                                <div class="col-sm-3">
+                                    <label>Domain Name</label>
+                                    <select class="select2" id="DOMAIN" name="DOMAIN" data-placeholder="Select Domain" style="width: 100%;"></select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <label>Start Date</label>
+                                    <input type="date" name="START_DATE" id="START_DATE" class="form-control">
+                                </div>
+                                <div class="col-sm-3">
+                                    <label>End Date</label>
+                                    <input type="date" name="END_DATE" id="END_DATE" class="form-control">
+                                </div>
+                                <div class="col-sm-6">
+                                    <label>Project Manager / PL</label>
+                                    <select class="select2" multiple="multiple" name="EMP_CODE" id="EMP_CODE" data-placeholder="Select Project Manager / PL" style="width: 100%;">
+                                        <option value="05854">PM1</option>
+                                        <option value="00090">PM2</option>
+                                        <option value="00420">PL1</option>
+                                    </select><input type="hidden" id="hdn">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+            </div>
+        </div>
+        <!-- /.row (main row) -->
+        <!-- Row -->
+        <div class="row">
+            <div class="col text-center">
+                <button type="button" id="addProject" class="btn btn-sm btn-success">Save</button>
+                <button type="reset" class="btn btn-sm btn-warning" onclick="location.reload()">Reset</button>
+            </div>
+            <div class="clearfix">&nbsp;</div>
+        </div>
+        <div class="clearfix">&nbsp;</div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body table-responsive pt-2">
+                        <table id="projectList" class="table table-bordered table-striped table-sm">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Project Code</th>
+                                    <th>Project Name</th>
+                                    <th>Domain</th>
+                                    <th>Start Date</th>
+                                    <th>End Date</th>
+                                    <th>Project Manager / PL</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbody_project"></tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Project Code</th>
+                                    <th>Project Name</th>
+                                    <th>Start Date</th>
+                                    <th>End Date</th>
+                                    <th>Project Manager</th>
+                                    <th>Action</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.container-fluid -->
+</section>
+<!-- /.content -->
+
+<script src="~/js/jquery/jquery.min.js"></script>
+<script src="~/js/jquery-ui/jquery-ui.min.js"></script>
+<script>
+    $(document).ready(function () {
+        debugger;
+        getDomain();
+        //getPMPL();
+        Project_GridList();
+        //$('#btn_cancel').click(function () {
+        //    Clear();
+        //});
+        $('#addProject').click(function () {
+            debugger;
+            Insert_ProjectData();
+        });
+    });
+
+    function getDomain() {
+
+        var Domain = $('#DOMAIN');
+        $('#DOMAIN').empty();
+        $.ajax({
+            url: "@Url.Action("GetDomain", "RMG")",
+            method: 'post',
+            dataType: 'json',
+            success: function (data) {
+                Domain.append($('<option/>', { value: -1, text: 'Please Select' }));
+                $(data).each(function (index, item) {
+                    Domain.append($('<option/>', { value: item.DOMAIN, text: item.DOMAIN }));
+                });
+            }
+        });
+    }
+
+
+
+</script>
+
+<script>
+    function Project_GridList() {
+        var dTable = $('#Approve').DataTable();
+        dTable.draw().clear();
+        dTable.destroy();
+        //alert('list');
+        var Data =
+         {
+             ID: 0,
+         };
+        debugger;
+        $.ajax({
+            async: false,
+            url: "@Url.Action("get_project_List", "RMG")",
+            type: "POST",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            data: JSON.stringify(Data),
+            success: function (result) {
+                var html = '';
+
+                $.each(result, function (key, item) {
+
+                    html += '<tr>';
+                    html += '<td>' + item.PROJECT_UID + '</td>';
+                    html += '<td>' + item.PROJECT_CODE + '</td>';
+                    html += '<td>' + item.PROJECT_NAME + '</td>';
+                    html += '<td>' + item.DOMAIN + '</td>';
+                    html += '<td>' + item.START_DATE + '</td>';
+                    html += '<td>' + item.END_DATE + '</td>';
+                    html += '<td>' + item.EMP_CODE + '</td>';
+                    html += '<td><a href="#" class="text-primary"><i class="fa fa-edit btnVclass"></i></a> &nbsp; <a href="#" class="text-danger"><i class="fa fa-trash btnDclass"></i></a></td>';
+                    //  html += '<td><a href="#" class="text-primary"><i class="fa fa-edit btnVclass"></i></a></td>';
+
+                    html += '</tr>';
+                });
+
+                $('#tbody_project').html(html);
+                //$('#Approve').DataTable({
+                //    paging: true,
+                //    searching: true,
+                //    sort: true,
+                //    "pageLength": 10,
+                //    "bLengthChange": false,
+                //    "bInfo": true,
+                //    //"bDestroy": true,
+                //});
+            },
+
+        });
+    }
+</script>
+<script language="javascript" type="text/javascript">
+    function Insert_ProjectData() {
+        var res = validate();
+        if (res == false) {
+            return false;
+        };
+        var ID = 0;
+        if ($('#hdn').val() == 0) {
+            ID = 0;
+        }
+        else {
+            ID = $('#hdn').val();
+        }
+
+        var Data =
+         {
+
+             PROJECT_UID: ID,
+
+             PROJECT_CODE: $('#PROJECT_CODE').val(),
+             PROJECT_NAME: $('#PROJECT_NAME').val(),
+             DOMAIN: $('#DOMAIN :selected').text(),
+             START_DATE: $('#START_DATE').val(),
+             END_DATE: $('#END_DATE').val(),
+             EMP_CODE: $('#EMP_CODE').val(),
+
+         };
+        $.ajax({
+
+            url: "@Url.Action("InsUpdProject", "RMG")",
+            type: "POST",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            data: JSON.stringify(Data),
+            success: function (result) {
+                if (result == true) {
+
+                    alert("Record is Saved Successfully");
+                    location.reload();
+                }
+                else if (result == false) {
+                    alert("Technical Issue occurs");
+                }
+
+            },
+            error: function (errormessage) {
+                alert(errormessage.responseText);
+            }
+        });
+    }
+
+</script>
+<script>
+    $('#projectList').on('click', '.btnVclass', function () {
+
+        var ID = $(this).closest('tr').children('td:eq(0)').text();
+        var Data =
+         {
+             ID: ID,
+         };
+
+        $.ajax({
+            url: "@Url.Action("get_project_List", "RMG")",
+            type: "POST",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            data: JSON.stringify(Data),
+            success: function (result) {
+                var total = result.length;
+                if (total != 0) {
+                    $.each(result, function (key, item) {
+                     
+                        $('#ID').val(item.PROJECT_UID);
+                        // $('#Emp_Code').val(item.Emp_Code);
+                        $('#PROJECT_CODE').val(item.PROJECT_CODE);
+                        $('#PROJECT_NAME').val(item.PROJECT_NAME);
+
+                        var sdt = item.START_DATE.substring(0, 10);
+                        var newsdate = sdt.split("-").reverse().join("-");
+                        var edt = item.END_DATE.substring(0, 10);
+                        var newedate = edt.split("-").reverse().join("-");
+                        $('#START_DATE').val(newsdate);
+                        $('#END_DATE').val(newedate);
+                        var valArr = item.EMP_CODE;
+                        size = valArr.length;
+                        var i = 0;
+
+                        $.each(valArr, function (i, e) {
+                            $("#EMP_CODE option[value='" + e + "']").prop("selected", true);
+                        });
+               
+                        $('#DOMAIN :selected').text(item.DOMAIN);
+                        //   $("#DOMAIN option[value='" + item.DOMAIN + "']").attr("selected", 1);
+                    });
+                }
+            },
+            error: function (errormessage) {
+                alert(errormessage.responseText);
+            }
+        });
+        //  $("#riskDetails").modal("show");
+        return false;
+    });
+</script>
+
+<script>
+    $('#projectList').on('click', '.btnDclass', function () {
+        debugger;
+        var x = confirm("Are you sure you want to delete?");
+      
+        if (x) {
+            var ID = $(this).closest('tr').children('td:eq(1)').text();// $('td:first', $(this).parents('tr')).text();// 
+            var Data =
+             {
+                 PROJECT_CODE: ID,
+             };
+            $.ajax({
+                url: "@Url.Action("DeleteProject", "RMG")",
+                type: "POST",
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                data: JSON.stringify(Data),
+                success: function (result) {
+                    if (result == true) {
+
+                        alert("Record is Deleted Successfully.");
+                        location.reload();
+                    }
+                    else if (result == false) {
+                        alert("Technical Issue occurs");
+                    }
+
+                },
+                error: function (errormessage) {
+                    alert(errormessage.responseText);
+                }
+            });
+        } else
+            return false;
+    });
+
+</script>
+
+<script>
+    ///validations
+    function validate() {
+        //dropdown
+        if ($("#DOMAIN option:selected").index() <= 0) {
+            alert('Please Select DOMAIN Name!');
+            $('#DOMAIN').focus();
+            $('#DOMAIN').css('border-color', 'red');
+            isValid = false;
+            return false;
+        } else { $('#DOMAIN').css('border-color', ''); }
+        //input text
+        if ($('#PROJECT_CODE').val() == "") {
+            alert('Please Enter PROJECT CODE!');
+            $('#PROJECT_CODE').focus();
+            $('#PROJECT_CODE').css('border-color', 'red');
+            isValid = false;
+            return false;
+        } else { $('#PROJECT_CODE').css('border-color', ''); }
+
+        if ($('#PROJECT_NAME').val() == "") {
+            alert('Please Enter Project Name!');
+            $('#PROJECT_NAME').focus();
+            $('#PROJECT_NAME').css('border-color', 'red');
+            isValid = false;
+            return false;
+        } else { $('#PROJECT_NAME').css('border-color', ''); }
+
+
+        //date
+        if ($('#START_DATE').val() == "") {
+            alert('Please Enter Start Date!');
+            $('#START_DATE').focus();
+            $('#START_DATE').css('border-color', 'red');
+            isValid = false;
+            return false;
+        } else { $('#START_DATE').css('border-color', ''); }
+
+        if ($('#END_DATE').val() == "") {
+            alert('Please Enter End Date!');
+            $('#END_DATE').focus();
+            $('#END_DATE').css('border-color', 'red');
+            isValid = false;
+            return false;
+        } else { $('#START_DATE').css('border-color', ''); }
+    }
+</script>

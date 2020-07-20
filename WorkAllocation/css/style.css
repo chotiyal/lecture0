@@ -1,0 +1,68 @@
+/* CSS Document */
+.brand-link .brand-image {
+    margin-left: .5rem !important;
+    margin-top: -8px !important;
+    max-height: 40px !important;
+	padding:2px;
+}
+a {color: #fa7e08;}
+a:hover {color: #1d6eb7;}
+.card-body {
+    flex: 1 1 auto;
+    padding:0.2rem 1.25rem 0.6rem 1.25rem;
+}
+label:not(.form-check-label):not(.custom-file-label) {
+    font-weight:normal;
+	font-size:14px;
+	color:#666666;
+}
+label {
+    display: inline-block;
+    margin-bottom: .15rem;
+}
+.content-header {
+    padding:10px .5rem 5px .5rem;
+}
+.content-header h1{font-size: 1.1rem;}
+.form-control {
+    height: calc(1.60rem + 2px);
+    padding: .1rem .75rem;
+    font-size:15px;
+    line-height: 1.0;
+    color: #495057;
+}
+.orange{color:#fc811a;}
+.blue{color:#0e609d;}
+.logotxt{font-size:26px;}
+.form-group {
+    margin-bottom: 0.5rem;
+}
+[class*=sidebar-dark-] {
+    background-color: #09365e;
+}
+.nav-pills .nav-link {
+    color: #93a7b8;
+}
+pt-2{padding-top:20px;}
+.card-header{background: rgb(11,39,108); background: linear-gradient(0deg, rgba(11,39,108,0.25) 0%, rgba(255,255,255,1) 60%);}
+.nav-sidebar>.nav-item {margin-bottom: 0; border-bottom:#072a49 solid 1px;}
+.os-content{padding:0 !important;}
+.text-sm .nav-link{padding:0.4em !important;}
+.sidebar-collapse .os-content{padding:0 8px !important;}
+.sidebar-collapse .text-sm .nav-link{padding:0.4em 0.8em !important;}
+.nav-pills .nav-link {border-radius:0 !important;}
+.nav-pills .nav-link:hover {background:#ff9600;}
+.content-wrapper {background: #e4ebf5;}
+.newbar{background-image: url('../img/office2.jpg'); background-size: cover;
+    background-position: 50%; background-color: #09365e;}
+.newbar .nav-sidebar>.nav-item {
+    margin-bottom: 0;
+    border-bottom: solid 1px rgba(255,255,255,0.2);
+}
+.newbar .nav-sidebar>.nav-item:hover>.nav-link{background:rgba(9,54,94,0.7);}
+.custom-file { height: calc(1.55rem + 2px);}
+.custom-file-label {height: calc(1.55rem + 2px); padding: .45rem .75rem; line-height:0.5rem;}
+.custom-file-input { height: calc(1.55rem + 2px);}
+.custom-file-label::after { height: 1.55rem; line-height:0.5rem;}
+.select2-container--default.select2-container--focus .select2-selection--multiple{border:#999999 solid 1px;}
+.select2-container--default .select2-selection--multiple .select2-selection__choice {background-color: #007bff;  border-color: #006fe6; color: #fff; padding: 0 10px; margin-top: .31rem;}
